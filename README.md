@@ -14,14 +14,14 @@ Copy what your need to your F-Droid client:
 
 |             |                                                                                |
 | ----------- | ------------------------------------------------------------------------------ |
-| Direct Link | `https://chen08209.github.io/FlClash-fdroid-repo/repo?fingerprint=789D6D32668712EF7672F9E58DEEB15FBD6DCEEC5AE7A4371EA72F2AAE8A12FD` |
+| Direct Link | `https://EyKettle.github.io/FlClash-fdroid-repo/repo?fingerprint=B3CDD351E9835637EDF4F22FF2B79A608BFCAC535646D843F0DE9A8DD01E6E08` |
 | Repo name   | FlClash                                                                      |
-| URL         | `https://chen08209.github.io/FlClash-fdroid-repo/repo`                         |
-| fingerprint | `789D6D32668712EF7672F9E58DEEB15FBD6DCEEC5AE7A4371EA72F2AAE8A12FD`                                                                  |
+| URL         | `https://EyKettle.github.io/FlClash-fdroid-repo/repo`                         |
+| fingerprint | `B3CDD351E9835637EDF4F22FF2B79A608BFCAC535646D843F0DE9A8DD01E6E08`                                                                  |
 
 Also you can scan the QR Code to add this repo:
 
-![QR Code](https://chen08209.github.io/FlClash-fdroid-repo/repo/index.png)
+![QR Code](https://EyKettle.github.io/FlClash-fdroid-repo/repo/index.png)
 
 ## Publish a Release APK
 

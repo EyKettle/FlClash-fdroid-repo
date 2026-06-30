@@ -33,7 +33,7 @@ if [ -n "$force" ] && [ "$force" != "--force" ]; then
   exit 2
 fi
 
-repo="chen08209/FlClash"
+repo="EyKettle/FlClash"
 tag="v${version}"
 asset="FlClash-${version}-android-arm64-v8a.apk"
 base_url="https://github.com/${repo}/releases/download/${tag}"
