@@ -10,7 +10,7 @@ Examples:
   scripts/fetch-flclash-release-apk.sh 0.8.94
   scripts/fetch-flclash-release-apk.sh v0.8.94 --force
 
-Downloads the FlClash Android arm64 APK from GitHub Releases into tmp/.
+Downloads the FlClash Android APK from GitHub Releases into tmp/.
 The APK is verified against the release SHA256SUMS file before it is moved.
 USAGE
 }
@@ -35,7 +35,8 @@ fi
 
 repo="EyKettle/FlClash"
 tag="v${version}"
-asset="FlClash-${version}-android-arm64-v8a.apk"
+abi="${abi:-arm64-v8a}"
+asset="FlClash-${version}-android-${abi}.apk"
 base_url="https://github.com/${repo}/releases/download/${tag}"
 apk_url="${base_url}/${asset}"
 checksums_url="${base_url}/SHA256SUMS"

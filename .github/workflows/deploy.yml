@@ -47,7 +47,7 @@ jobs:
           if git ls-remote --exit-code --heads origin gh-pages >/dev/null 2>&1; then
             git clone --depth 1 --branch gh-pages "https://github.com/${GITHUB_REPOSITORY}.git" ./.previous-pages
             if [ -d ./.previous-pages/repo ]; then
-              find ./.previous-pages/repo -maxdepth 1 -name 'FlClash-*-android-arm64-v8a.apk' -exec cp {} ./fdroid/repo/ \;
+              find ./.previous-pages/repo -maxdepth 1 -name 'FlClash-*-android-*.apk' -exec cp {} ./fdroid/repo/ \;
             fi
           fi
 
@@ -56,12 +56,14 @@ jobs:
               echo "version is required when apk_url is set" >&2
               exit 1
             fi
-            curl --fail --location --retry 3 --output "./fdroid/repo/FlClash-${version}-android-arm64-v8a.apk" "$apk_url"
+            curl --fail --location --retry 3 --output "./fdroid/repo/$(basename "$apk_url")" "$apk_url"
           elif [ -n "$version" ]; then
-            apk_url="https://github.com/EyKettle/FlClash/releases/download/v${version}/FlClash-${version}-android-arm64-v8a.apk"
-            curl --fail --location --retry 3 --output "./fdroid/repo/FlClash-${version}-android-arm64-v8a.apk" "$apk_url"
+            for abi in arm64-v8a armeabi-v7a x86_64; do
+              apk_url="https://github.com/EyKettle/FlClash/releases/download/v${version}/FlClash-${version}-android-${abi}.apk"
+              curl --fail --location --retry 3 --output "./fdroid/repo/FlClash-${version}-android-${abi}.apk" "$apk_url"
+            done
           else
-            pushed_apk=$(find ./tmp -maxdepth 1 -name 'FlClash-*-android-arm64-v8a.apk' -print -quit)
+            pushed_apk=$(find ./tmp -maxdepth 1 -name 'FlClash-*-android-*.apk' -print -quit)
             if [ -z "$pushed_apk" ]; then
               echo "No pushed APK found in ./tmp" >&2
               exit 1
@@ -72,7 +74,7 @@ jobs:
       - name: Keep Latest APKs
         run: |
           cd ./fdroid/
-          find ./repo -maxdepth 1 -name 'FlClash-*-android-arm64-v8a.apk' -print0 |
+          find ./repo -maxdepth 1 -name 'FlClash-*-android-*.apk' -print0 |
             while IFS= read -r -d '' apk; do
               version_code=$(aapt dump badging "$apk" | grep versionCode | sed "s/.*versionCode='//" | sed "s/'.*//")
               printf '%s\t%s\n' "$version_code" "$apk"
@@ -85,7 +87,7 @@ jobs:
         run: |
           cd ./fdroid/
           apk_path=$(
-            find ./repo -maxdepth 1 -name 'FlClash-*-android-arm64-v8a.apk' -print0 |
+            find ./repo -maxdepth 1 -name 'FlClash-*-android-*.apk' -print0 |
               while IFS= read -r -d '' apk; do
                 version_code=$(aapt dump badging "$apk" | grep versionCode | sed "s/.*versionCode='//" | sed "s/'.*//")
                 printf '%s\t%s\n' "$version_code" "$apk"
