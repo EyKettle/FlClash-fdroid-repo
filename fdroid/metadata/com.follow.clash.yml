@@ -10,7 +10,7 @@ SourceCode: https://github.com/EyKettle/FlClash
 IssueTracker: https://github.com/EyKettle/FlClash/issues
 Changelog: https://github.com/EyKettle/FlClash/releases
 
-AllowedAPKSigningKeys: 2859e236b6c1c6073773752678c52e8e902a9503ae9beed6729ca999c376841c
+AllowedAPKSigningKeys: cff9dcd3a5d15b56f486bde87f3a46ec9f6e9895678d7fb9b9afc16540593b39
 
 CurrentVersion: VERSION
 CurrentVersionCode: VERSIONCODE
