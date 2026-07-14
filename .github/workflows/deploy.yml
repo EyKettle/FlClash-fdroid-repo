@@ -1,108 +1,78 @@
 name: deploy
 
 on:
-  push:
-    paths:
-      - 'tmp/*.apk'
-    branches:
-      - main
   workflow_dispatch:
     inputs:
       version:
         description: 'FlClash release version, for example 0.8.93 or v0.8.93'
-        required: false
+        required: true
         type: string
-      apk_url:
-        description: 'Optional APK download URL. Defaults to the FlClash GitHub release asset.'
-        required: false
-        type: string
+
+env:
+  APK_KEEP_COUNT: 5
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    env:
-      APK_KEEP_COUNT: 5
     permissions:
       contents: write
     steps:
-      - name: Setup fdroidserver and aapt
+      - uses: actions/checkout@v7
+        name: Checkout
+
+      - name: Prepare
         run: |
+          set -e
           sudo apt-get update
           sudo apt-get install aapt apksigner pipx -y
           pipx install fdroidserver
           echo "$HOME/.local/bin" >> "$GITHUB_PATH"
           fdroid --version
 
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Prepare APKs
-        run: |
-          version="${{ inputs.version }}"
-          version="${version#v}"
-          apk_url="${{ inputs.apk_url }}"
-
+          # Prepare APK directory
           mkdir -p ./fdroid/repo/
 
+          # Retain historical APKs from gh-pages
           if git ls-remote --exit-code --heads origin gh-pages >/dev/null 2>&1; then
-            git clone --depth 1 --branch gh-pages "https://github.com/${GITHUB_REPOSITORY}.git" ./.previous-pages
+            git clone --depth 1 --branch gh-pages \
+              "https://github.com/${GITHUB_REPOSITORY}.git" ./.previous-pages
             if [ -d ./.previous-pages/repo ]; then
-              find ./.previous-pages/repo -maxdepth 1 -name 'FlClash-*-android-*.apk' -exec cp {} ./fdroid/repo/ \;
+              find ./.previous-pages/repo -maxdepth 1 \
+                -name 'FlClash-*-android-*.apk' -exec cp {} ./fdroid/repo/ \;
             fi
           fi
 
-          if [ -n "$apk_url" ]; then
-            if [ -z "$version" ]; then
-              echo "version is required when apk_url is set" >&2
-              exit 1
-            fi
-            curl --fail --location --retry 3 --output "./fdroid/repo/$(basename "$apk_url")" "$apk_url"
-          elif [ -n "$version" ]; then
-            for abi in arm64-v8a armeabi-v7a x86_64; do
-              apk_url="https://github.com/EyKettle/FlClash/releases/download/v${version}/FlClash-${version}-android-${abi}.apk"
-              curl --fail --location --retry 3 --output "./fdroid/repo/FlClash-${version}-android-${abi}.apk" "$apk_url"
-            done
-          else
-            pushed_apk=$(find ./tmp -maxdepth 1 -name 'FlClash-*-android-*.apk' -print -quit)
-            if [ -z "$pushed_apk" ]; then
-              echo "No pushed APK found in ./tmp" >&2
-              exit 1
-            fi
-            cp "$pushed_apk" ./fdroid/repo/
-          fi
+          # Download all 3 ABIs from FlClash Release
+          version="${{ inputs.version }}"
+          version="${version#v}"
+          for abi in arm64-v8a armeabi-v7a x86_64; do
+            apk_url="https://github.com/EyKettle/FlClash/releases/download/v${version}/FlClash-${version}-android-${abi}.apk"
+            curl --fail --location --retry 3 \
+              --output "./fdroid/repo/FlClash-${version}-android-${abi}.apk" \
+              "$apk_url" || echo "Warning: ${abi} APK not found, skipping"
+          done
 
-      - name: Keep Latest APKs
+      - name: Build
         run: |
           cd ./fdroid/
+
+          # Collect version info
           find ./repo -maxdepth 1 -name 'FlClash-*-android-*.apk' -print0 |
             while IFS= read -r -d '' apk; do
-              version_code=$(aapt dump badging "$apk" | grep versionCode | sed "s/.*versionCode='//" | sed "s/'.*//")
-              printf '%s\t%s\n' "$version_code" "$apk"
-            done |
-            sort -rn |
-            awk -v keep="$APK_KEEP_COUNT" 'NR > keep { print $2 }' |
-            xargs -r rm -f
+              vc=$(aapt dump badging "$apk" | grep versionCode | sed "s/.*versionCode='//; s/'.*//")
+              vn=$(aapt dump badging "$apk" | grep versionName | sed "s/.*versionName='//; s/'.*//")
+              printf '%s\t%s\t%s\n' "$vc" "$vn" "$apk"
+            done | sort -rn > .apk-index
 
-      - name: Set Secrets
-        run: |
-          cd ./fdroid/
-          apk_path=$(
-            find ./repo -maxdepth 1 -name 'FlClash-*-android-*.apk' -print0 |
-              while IFS= read -r -d '' apk; do
-                version_code=$(aapt dump badging "$apk" | grep versionCode | sed "s/.*versionCode='//" | sed "s/'.*//")
-                printf '%s\t%s\n' "$version_code" "$apk"
-              done |
-              sort -rn |
-              awk 'NR == 1 { print $2 }'
-          )
-          if [ -z "$apk_path" ]; then
+          awk -v keep="$APK_KEEP_COUNT" 'NR > keep { print $3 }' .apk-index | xargs -r rm -f
+
+          read VC VN APK_PATH <<< $(head -1 .apk-index)
+          if [ -z "$APK_PATH" ]; then
             echo "No FlClash APK found in ./fdroid/repo" >&2
             exit 1
           fi
 
-          export VERSION=$(aapt dump badging "$apk_path" | grep versionName | sed "s/.*versionName='//" | sed "s/'.*//")
-          export VERSIONCODE=$(aapt dump badging "$apk_path" | grep versionCode | sed "s/.*versionCode='//" | sed "s/'.*//")
-
+          # Inject signing secrets
           sed -i 's/KEYALIAS/${{ secrets.KEY_ALIAS }}/g' config.yml
           sed -i 's/KEYSTOREPASS/${{ secrets.STORE_PASSWORD }}/g' config.yml
           sed -i 's/KEYPASS/${{ secrets.KEY_PASSWORD }}/g' config.yml
@@ -110,14 +80,16 @@ jobs:
           echo "${{ secrets.KEYSTORE }}" | base64 --decode > keystore.keystore
           chmod 600 config.yml keystore.keystore
 
-          sed -i "s/VERSIONCODE/$VERSIONCODE/g" ./metadata/com.follow.clash.yml
-          sed -i "s/VERSION/$VERSION/g" ./metadata/com.follow.clash.yml
+          if grep -qE 'KEYALIAS|KEYSTOREPASS|KEYPASS|KEYDNAME' config.yml; then
+            echo "ERROR: Secrets placeholders not replaced — secrets may be missing" >&2
+            exit 1
+          fi
 
-          cd ..
+          # Update metadata
+          sed -i "s/VERSIONCODE/$VC/g" ./metadata/com.follow.clash.yml
+          sed -i "s/VERSION/$VN/g" ./metadata/com.follow.clash.yml
 
-      - name: Update fdroidrepo
-        run: |
-          cd ./fdroid/
+          # Build F-Droid index
           fdroid update --pretty --delete-unknown --use-date-from-apk
           rm config.yml keystore.keystore
           cd ..
@@ -133,7 +105,10 @@ jobs:
           mkdir ./.publish
           cp -a ./fdroid/. ./.publish/
 
-          git clone --no-checkout "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" ./.publish-git
+          rm -rf ./.publish-git
+          git clone --no-checkout \
+            "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" \
+            ./.publish-git
           cd ./.publish-git
           git config user.name 'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
@@ -154,9 +129,12 @@ jobs:
           new_tree=$(git write-tree)
 
           if [ -n "$old_commit" ]; then
-            new_commit=$(printf 'Deploy F-Droid repo from %s\n' "$GITHUB_SHA" | git commit-tree "$new_tree" -p "$old_commit")
-            git push --force-with-lease=refs/heads/gh-pages:"$expected_remote" origin "$new_commit":refs/heads/gh-pages
+            new_commit=$(printf 'Deploy F-Droid repo from %s\n' "$GITHUB_SHA" | \
+              git commit-tree "$new_tree" -p "$old_commit")
+            git push --force-with-lease=refs/heads/gh-pages:"$expected_remote" \
+              origin "$new_commit":refs/heads/gh-pages
           else
-            new_commit=$(printf 'Deploy F-Droid repo from %s\n' "$GITHUB_SHA" | git commit-tree "$new_tree")
+            new_commit=$(printf 'Deploy F-Droid repo from %s\n' "$GITHUB_SHA" | \
+              git commit-tree "$new_tree")
             git push origin "$new_commit":refs/heads/gh-pages
           fi

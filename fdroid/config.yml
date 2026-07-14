@@ -1,4 +1,4 @@
-repo_url: https://EyKettle.github.io/FlClash-fdroid-repo/repo
+repo_url: https://flclash.eykettle.top/repo
 repo_name: FlClash
 repo_description: >-
   The official F-Droid repository for FlClash.
@@ -8,3 +8,6 @@ keystore: keystore.keystore
 keystorepass: KEYSTOREPASS
 keypass: KEYPASS
 keydname: KEYDNAME
+
+# archive: keep at most 5 versions in main repo
+archive_older: 5
