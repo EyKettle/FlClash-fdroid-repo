@@ -1,0 +1,16 @@
+{
+  "repo": {
+    "timestamp": 1784125522000,
+    "version": 20002,
+    "name": "My First F-Droid Archive Demo",
+    "icon": "icon.png",
+    "description": "These are the apps that have been archived from the main repo.",
+    "address": "https://flclash.eykettle.top/archive"
+  },
+  "requests": {
+    "install": [],
+    "uninstall": []
+  },
+  "apps": [],
+  "packages": {}
+}

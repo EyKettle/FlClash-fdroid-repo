@@ -1,0 +1,16 @@
+{
+  "repo": {
+    "timestamp": 1784125526000,
+    "version": 20002,
+    "name": "FlClash",
+    "icon": "icon.png",
+    "address": "https://flclash.eykettle.top/repo",
+    "description": "The official F-Droid repository for FlClash."
+  },
+  "requests": {
+    "install": [],
+    "uninstall": []
+  },
+  "apps": [],
+  "packages": {}
+}
