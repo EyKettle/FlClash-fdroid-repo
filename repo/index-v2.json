@@ -4,7 +4,7 @@
       "en-US": "FlClash"
     },
     "description": {
-      "en-US": "The official F-Droid repository for FlClash."
+      "en-US": "Unofficial F-Droid repository for the EyKettle fork of FlClash."
     },
     "icon": {
       "en-US": {
@@ -14,7 +14,274 @@
       }
     },
     "address": "https://flclash.eykettle.top/repo",
-    "timestamp": 1784125526000
+    "timestamp": 1784156608000,
+    "categories": {
+      "Connectivity": {
+        "name": {
+          "en-US": "Connectivity"
+        }
+      },
+      "Internet": {
+        "name": {
+          "en-US": "Internet"
+        }
+      }
+    }
   },
-  "packages": {}
+  "packages": {
+    "com.follow.clash": {
+      "metadata": {
+        "added": 1784156598000,
+        "categories": [
+          "Internet",
+          "Connectivity"
+        ],
+        "changelog": "https://github.com/EyKettle/FlClash/releases",
+        "issueTracker": "https://github.com/EyKettle/FlClash/issues",
+        "lastUpdated": 1784156600000,
+        "license": "GPL-3.0-or-later",
+        "sourceCode": "https://github.com/EyKettle/FlClash",
+        "authorName": "EyKettle",
+        "name": {
+          "en-US": "FlClash"
+        },
+        "summary": {
+          "en-US": "A multi-platform proxy client based on ClashMeta.",
+          "zh-CN": "基于ClashMeta的多平台代理客户端，简单易用，开源无广告。"
+        },
+        "description": {
+          "en-US": "✈️ Multi-platform: Android, Windows, macOS and Linux\n\n💻 Adaptive multiple screen sizes, Multiple color themes available\n\n💡 Based on Material You Design, Surfboard-like UI\n\n☁️ Supports data sync via WebDAV\n\n✨ Support subscription link, Dark mode",
+          "zh-CN": "✈️ 多平台: Android, Windows, macOS and Linux\n\n💻 自适应多个屏幕尺寸,多种颜色主题可供选择\n\n💡 基本 Material You 设计, 类Surfboard用户界面\n\n☁️ 支持通过WebDAV同步数据\n\n✨ 支持一键导入订阅, 深色模式"
+        },
+        "icon": {
+          "en-US": {
+            "name": "/com.follow.clash/en-US/icon_WEd-r8lMFUzb7RfF4hkm1NZdvmb7DZSsQI-L_YuRq7A=.png",
+            "sha256": "58477eafc94c154cdbed17c5e21926d4d65dbe66fb0d94ac408f8bfd8b91abb0",
+            "size": 17577
+          },
+          "zh-CN": {
+            "name": "/com.follow.clash/zh-CN/icon_WEd-r8lMFUzb7RfF4hkm1NZdvmb7DZSsQI-L_YuRq7A=.png",
+            "sha256": "58477eafc94c154cdbed17c5e21926d4d65dbe66fb0d94ac408f8bfd8b91abb0",
+            "size": 17577
+          }
+        },
+        "preferredSigner": "cff9dcd3a5d15b56f486bde87f3a46ec9f6e9895678d7fb9b9afc16540593b39"
+      },
+      "versions": {
+        "2152e2706c2191094ae80ce9bd343598ca17914d35746f7a2b21104eb9b0d9f3": {
+          "added": 1784156600000,
+          "file": {
+            "name": "/FlClash-0.8.94-android-x86_64.apk",
+            "sha256": "2152e2706c2191094ae80ce9bd343598ca17914d35746f7a2b21104eb9b0d9f3",
+            "size": 55497571
+          },
+          "manifest": {
+            "nativecode": [
+              "x86_64"
+            ],
+            "versionName": "0.8.94",
+            "versionCode": 2026075501,
+            "usesSdk": {
+              "minSdkVersion": 24,
+              "targetSdkVersion": 36
+            },
+            "signer": {
+              "sha256": [
+                "cff9dcd3a5d15b56f486bde87f3a46ec9f6e9895678d7fb9b9afc16540593b39"
+              ]
+            },
+            "usesPermission": [
+              {
+                "name": "android.permission.INTERNET"
+              },
+              {
+                "name": "android.permission.FOREGROUND_SERVICE"
+              },
+              {
+                "name": "android.permission.RECEIVE_BOOT_COMPLETED"
+              },
+              {
+                "name": "android.permission.ACCESS_NETWORK_STATE"
+              },
+              {
+                "name": "android.permission.ACCESS_WIFI_STATE"
+              },
+              {
+                "name": "android.permission.CHANGE_NETWORK_STATE"
+              },
+              {
+                "name": "android.permission.QUERY_ALL_PACKAGES"
+              },
+              {
+                "name": "android.permission.FOREGROUND_SERVICE_SPECIAL_USE"
+              },
+              {
+                "name": "android.permission.POST_NOTIFICATIONS"
+              },
+              {
+                "name": "android.permission.POST_PROMOTED_NOTIFICATIONS"
+              },
+              {
+                "name": "android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS"
+              },
+              {
+                "name": "com.follow.clash.permission.RECEIVE_BROADCASTS"
+              },
+              {
+                "name": "android.permission.CAMERA"
+              },
+              {
+                "name": "android.permission.ACCESS_FINE_LOCATION"
+              },
+              {
+                "name": "com.follow.clash.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+              }
+            ]
+          }
+        },
+        "d6ea332ec9cdd2c4fd89af53e37b44ac2b9ad6f90dda3736fd6c6e860a10819c": {
+          "added": 1784156598000,
+          "file": {
+            "name": "/FlClash-0.8.94-android-arm64-v8a.apk",
+            "sha256": "d6ea332ec9cdd2c4fd89af53e37b44ac2b9ad6f90dda3736fd6c6e860a10819c",
+            "size": 53306788
+          },
+          "manifest": {
+            "nativecode": [
+              "arm64-v8a"
+            ],
+            "versionName": "0.8.94",
+            "versionCode": 2026073501,
+            "usesSdk": {
+              "minSdkVersion": 24,
+              "targetSdkVersion": 36
+            },
+            "signer": {
+              "sha256": [
+                "cff9dcd3a5d15b56f486bde87f3a46ec9f6e9895678d7fb9b9afc16540593b39"
+              ]
+            },
+            "usesPermission": [
+              {
+                "name": "android.permission.INTERNET"
+              },
+              {
+                "name": "android.permission.FOREGROUND_SERVICE"
+              },
+              {
+                "name": "android.permission.RECEIVE_BOOT_COMPLETED"
+              },
+              {
+                "name": "android.permission.ACCESS_NETWORK_STATE"
+              },
+              {
+                "name": "android.permission.ACCESS_WIFI_STATE"
+              },
+              {
+                "name": "android.permission.CHANGE_NETWORK_STATE"
+              },
+              {
+                "name": "android.permission.QUERY_ALL_PACKAGES"
+              },
+              {
+                "name": "android.permission.FOREGROUND_SERVICE_SPECIAL_USE"
+              },
+              {
+                "name": "android.permission.POST_NOTIFICATIONS"
+              },
+              {
+                "name": "android.permission.POST_PROMOTED_NOTIFICATIONS"
+              },
+              {
+                "name": "android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS"
+              },
+              {
+                "name": "com.follow.clash.permission.RECEIVE_BROADCASTS"
+              },
+              {
+                "name": "android.permission.CAMERA"
+              },
+              {
+                "name": "android.permission.ACCESS_FINE_LOCATION"
+              },
+              {
+                "name": "com.follow.clash.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+              }
+            ]
+          }
+        },
+        "36f0036dfc1eb83bf5460b72e492babccbbfbbf444c9c6f39aec2f105883060d": {
+          "added": 1784156599000,
+          "file": {
+            "name": "/FlClash-0.8.94-android-armeabi-v7a.apk",
+            "sha256": "36f0036dfc1eb83bf5460b72e492babccbbfbbf444c9c6f39aec2f105883060d",
+            "size": 53258986
+          },
+          "manifest": {
+            "nativecode": [
+              "armeabi-v7a"
+            ],
+            "versionName": "0.8.94",
+            "versionCode": 2026072501,
+            "usesSdk": {
+              "minSdkVersion": 24,
+              "targetSdkVersion": 36
+            },
+            "signer": {
+              "sha256": [
+                "cff9dcd3a5d15b56f486bde87f3a46ec9f6e9895678d7fb9b9afc16540593b39"
+              ]
+            },
+            "usesPermission": [
+              {
+                "name": "android.permission.INTERNET"
+              },
+              {
+                "name": "android.permission.FOREGROUND_SERVICE"
+              },
+              {
+                "name": "android.permission.RECEIVE_BOOT_COMPLETED"
+              },
+              {
+                "name": "android.permission.ACCESS_NETWORK_STATE"
+              },
+              {
+                "name": "android.permission.ACCESS_WIFI_STATE"
+              },
+              {
+                "name": "android.permission.CHANGE_NETWORK_STATE"
+              },
+              {
+                "name": "android.permission.QUERY_ALL_PACKAGES"
+              },
+              {
+                "name": "android.permission.FOREGROUND_SERVICE_SPECIAL_USE"
+              },
+              {
+                "name": "android.permission.POST_NOTIFICATIONS"
+              },
+              {
+                "name": "android.permission.POST_PROMOTED_NOTIFICATIONS"
+              },
+              {
+                "name": "android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS"
+              },
+              {
+                "name": "com.follow.clash.permission.RECEIVE_BROADCASTS"
+              },
+              {
+                "name": "android.permission.CAMERA"
+              },
+              {
+                "name": "android.permission.ACCESS_FINE_LOCATION"
+              },
+              {
+                "name": "com.follow.clash.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
 }

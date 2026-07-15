@@ -1,8 +1,8 @@
 {
   "METADATA_VERSION": 20002,
   "allow_disabled_algorithms": false,
-  "FlClash-0.8.93-android-arm64-v8a.apk": {
-    "hash": "f31181c9e40259936ac70d6bc3ad36a6755739229d3e784102cfaa59fa9dc647",
+  "FlClash-0.8.94-android-arm64-v8a.apk": {
+    "hash": "d6ea332ec9cdd2c4fd89af53e37b44ac2b9ad6f90dda3736fd6c6e860a10819c",
     "hashType": "sha256",
     "uses-permission": [
       [
@@ -62,23 +62,88 @@
         null
       ],
       [
-        "android.permission.WAKE_LOCK",
+        "com.follow.clash.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION",
+        null
+      ]
+    ],
+    "uses-permission-sdk-23": [],
+    "features": [],
+    "icons_src": {},
+    "icons": {},
+    "antiFeatures": {},
+    "packageName": "com.follow.clash",
+    "versionCode": 2026073501,
+    "name": "FlClash",
+    "versionName": "0.8.94",
+    "minSdkVersion": 24,
+    "targetSdkVersion": 36,
+    "nativecode": [
+      "arm64-v8a"
+    ],
+    "sig": "912364dfb2fcffacf05eea9f8113cf9c",
+    "signer": "cff9dcd3a5d15b56f486bde87f3a46ec9f6e9895678d7fb9b9afc16540593b39",
+    "size": 53306788,
+    "apkName": "FlClash-0.8.94-android-arm64-v8a.apk",
+    "added": 1784156598.476635
+  },
+  "FlClash-0.8.94-android-armeabi-v7a.apk": {
+    "hash": "36f0036dfc1eb83bf5460b72e492babccbbfbbf444c9c6f39aec2f105883060d",
+    "hashType": "sha256",
+    "uses-permission": [
+      [
+        "android.permission.INTERNET",
         null
       ],
       [
-        "com.google.android.gms.permission.AD_ID",
+        "android.permission.FOREGROUND_SERVICE",
         null
       ],
       [
-        "android.permission.ACCESS_ADSERVICES_ATTRIBUTION",
+        "android.permission.RECEIVE_BOOT_COMPLETED",
         null
       ],
       [
-        "android.permission.ACCESS_ADSERVICES_AD_ID",
+        "android.permission.ACCESS_NETWORK_STATE",
         null
       ],
       [
-        "com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE",
+        "android.permission.ACCESS_WIFI_STATE",
+        null
+      ],
+      [
+        "android.permission.CHANGE_NETWORK_STATE",
+        null
+      ],
+      [
+        "android.permission.QUERY_ALL_PACKAGES",
+        null
+      ],
+      [
+        "android.permission.FOREGROUND_SERVICE_SPECIAL_USE",
+        null
+      ],
+      [
+        "android.permission.POST_NOTIFICATIONS",
+        null
+      ],
+      [
+        "android.permission.POST_PROMOTED_NOTIFICATIONS",
+        null
+      ],
+      [
+        "android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS",
+        null
+      ],
+      [
+        "com.follow.clash.permission.RECEIVE_BROADCASTS",
+        null
+      ],
+      [
+        "android.permission.CAMERA",
+        null
+      ],
+      [
+        "android.permission.ACCESS_FINE_LOCATION",
         null
       ],
       [
@@ -92,18 +157,103 @@
     "icons": {},
     "antiFeatures": {},
     "packageName": "com.follow.clash",
-    "versionCode": 2026054901,
+    "versionCode": 2026072501,
     "name": "FlClash",
-    "versionName": "0.8.93",
+    "versionName": "0.8.94",
     "minSdkVersion": 24,
     "targetSdkVersion": 36,
     "nativecode": [
-      "arm64-v8a"
+      "armeabi-v7a"
     ],
-    "sig": "01d20204fe36565bf08806d0249b75a9",
-    "signer": "2859e236b6c1c6073773752678c52e8e902a9503ae9beed6729ca999c376841c",
-    "size": 51822763,
-    "apkName": "FlClash-0.8.93-android-arm64-v8a.apk",
-    "added": 1784125519.29803
+    "sig": "912364dfb2fcffacf05eea9f8113cf9c",
+    "signer": "cff9dcd3a5d15b56f486bde87f3a46ec9f6e9895678d7fb9b9afc16540593b39",
+    "size": 53258986,
+    "apkName": "FlClash-0.8.94-android-armeabi-v7a.apk",
+    "added": 1784156599.780641
+  },
+  "FlClash-0.8.94-android-x86_64.apk": {
+    "hash": "2152e2706c2191094ae80ce9bd343598ca17914d35746f7a2b21104eb9b0d9f3",
+    "hashType": "sha256",
+    "uses-permission": [
+      [
+        "android.permission.INTERNET",
+        null
+      ],
+      [
+        "android.permission.FOREGROUND_SERVICE",
+        null
+      ],
+      [
+        "android.permission.RECEIVE_BOOT_COMPLETED",
+        null
+      ],
+      [
+        "android.permission.ACCESS_NETWORK_STATE",
+        null
+      ],
+      [
+        "android.permission.ACCESS_WIFI_STATE",
+        null
+      ],
+      [
+        "android.permission.CHANGE_NETWORK_STATE",
+        null
+      ],
+      [
+        "android.permission.QUERY_ALL_PACKAGES",
+        null
+      ],
+      [
+        "android.permission.FOREGROUND_SERVICE_SPECIAL_USE",
+        null
+      ],
+      [
+        "android.permission.POST_NOTIFICATIONS",
+        null
+      ],
+      [
+        "android.permission.POST_PROMOTED_NOTIFICATIONS",
+        null
+      ],
+      [
+        "android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS",
+        null
+      ],
+      [
+        "com.follow.clash.permission.RECEIVE_BROADCASTS",
+        null
+      ],
+      [
+        "android.permission.CAMERA",
+        null
+      ],
+      [
+        "android.permission.ACCESS_FINE_LOCATION",
+        null
+      ],
+      [
+        "com.follow.clash.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION",
+        null
+      ]
+    ],
+    "uses-permission-sdk-23": [],
+    "features": [],
+    "icons_src": {},
+    "icons": {},
+    "antiFeatures": {},
+    "packageName": "com.follow.clash",
+    "versionCode": 2026075501,
+    "name": "FlClash",
+    "versionName": "0.8.94",
+    "minSdkVersion": 24,
+    "targetSdkVersion": 36,
+    "nativecode": [
+      "x86_64"
+    ],
+    "sig": "912364dfb2fcffacf05eea9f8113cf9c",
+    "signer": "cff9dcd3a5d15b56f486bde87f3a46ec9f6e9895678d7fb9b9afc16540593b39",
+    "size": 55497571,
+    "apkName": "FlClash-0.8.94-android-x86_64.apk",
+    "added": 1784156600.977646
   }
 }

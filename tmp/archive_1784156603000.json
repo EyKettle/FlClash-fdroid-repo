@@ -1,0 +1,20 @@
+{
+  "repo": {
+    "name": {
+      "en-US": "My First F-Droid Archive Demo"
+    },
+    "description": {
+      "en-US": "These are the apps that have been archived from the main repo."
+    },
+    "icon": {
+      "en-US": {
+        "name": "/icons/icon.png",
+        "sha256": "b6045af66e2e765643a50ac4871d388a9004e90dea93046696ac742ff8bf2e23",
+        "size": 19980
+      }
+    },
+    "address": "https://flclash.eykettle.top/archive",
+    "timestamp": 1784156603000
+  },
+  "packages": {}
+}
